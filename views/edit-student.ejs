@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Edit student</h3>
+    <form method="post" action="">
+        <h1>Subcribe Student</h1>
+    
+        <input type="text" value="<%= fName%>" name="fName">
+        <input type="text" value="<%= lName%>" name="lName">
+        <input type="text" name="birthday" value="<%= birthday%>">
+
+        <label for="currentClass">Current class:</label>
+        <select name="currentClass">
+            <%
+                let options = [ "", "1a", "2b", "3", "4a"];
+                for ( let i = 0; i < options.length; i++ ) {
+                        let selected = ( currentClass == options[i] ) ? "selected" : "";
+                        %><option value="<%= options[i] %>" <%= selected %>><%=options[i] %> </option>
+                <% } 
+            %>
+        </select>
+
+        <input type="text" value="<%= currentTeacher%>" name="currentTeacher">
+
+        <label for="previousClass">Previous class:</label>
+        <select name="previousClass">
+            <%
+                let optionsPC = [ "", "Not at Saint Boni", "1a", "2a", "3", "4a"];
+                for ( let i = 0; i < optionsPC.length; i++ ) {
+                        let selected = ( previousClass == optionsPC[i] ) ? "selected" : "";
+                        %><option value="<%= optionsPC[i] %>" <%= selected %>><%=optionsPC[i] %> </option>
+                <% } 
+            %>
+        </select>
+
+        <input type="text" value="<%= previousTeacher%>" name="previousTeacher">
+
+        <input type="text" value="<%= parentNameOne%>" name="parentNameOne">
+        <input type="text" value="<%= parentPhoneOne%>" name="parentPhoneOne">
+        <input type="text" value="<%= parentEmailOne%>" name="parentEmailOne">
+        <input type="text" value="<%= parentNameTwo%>" name="parentNameTwo">
+        <input type="text" value="<%= parentPhoneTwo%>" name="parentPhoneTwo">
+        <input type="text" value="<%= parentEmailTwo%>" name="parentEmailTwo">
+
+        <hr>
+
+        <%
+        let allProblems = [ "dyslexia", "dyscalculia", "autism"];
+        for ( let i = 0; i < allProblems.length; i++ ) {
+                let checked = ( problems.includes(allProblems[i]) ) ? "checked" : ""; %>
+                <input type="checkbox" id="<%= allProblems[i] %>" name="problem" value="<%= allProblems[i] %>"  <%= checked %> >
+                <label for="<%= allProblems[i] %>"> <%= allProblems[i] %></label><br>
+        <% } %>
+
+        <hr>
+
+        <h4>Documents:</h4>
+        <% documents.forEach( document => { %>
+            <p>Documents: <%= document.documentName %></p>
+            <p>Date on document: <%= document.documentDate%></p>
+            <p>Date added: <%= document.dateAddedDatabase%></p>
+        <% }) %>
+        <hr>
+
+        <input type="text" placeholder="new note" name="note">
+
+        <h4>Notes: </h4>
+        <% notes.forEach( note => { %>
+            <p>Note: <%= note.note %></p>
+            <p>Date added: <%= note.dateNoteAdded%></p>
+        <% }) %>
+
+        <button type="submit">Edit student</button>
+    
+    </form>
+
+</body>
+</html>

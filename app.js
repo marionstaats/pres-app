@@ -20,6 +20,16 @@ app.use(express.static(publicDirectory));
 //View engine config
 app.set("view engine", "ejs");
 
+//Routes
+const adminRoutes = require('./server/routes/admin.route');
+
+app.use(adminRoutes);
+
+//404 page
+app.use((req, res) => {
+    res.status(404).send('Page Not Found');
+});
+
 //Connection MongoDB
 mongoose.connect(process.env.DB_CONNECT, { 
     useNewUrlParser: true, 
