@@ -2,6 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const path = require('path');
+const passport = require("passport");
+const LocalStrategy = require("passport-local"); 
+const User = require('./server/models/user.model');
 
 //Dotenv - allows you to separate secrets from your source code (passwords etc)
 dotenv.config();
@@ -20,10 +23,42 @@ app.use(express.static(publicDirectory));
 //View engine config
 app.set("view engine", "ejs");
 
-//Routes
-const adminRoutes = require('./server/routes/admin.route');
+//Config sessions
+app.use(require("express-session")({ 
+	secret: "Rollotjetjetje is eating your toe", 
+	resave: false, 
+	saveUninitialized: false,
+	cookie: {}
+}));
 
-app.use(adminRoutes);
+//In production set 'cookies secure = true' 
+if (app.get('env') === 'production') {
+	app.set('trust proxy', 1) // trust first proxy
+	sess.cookie.secure = true // serve secure cookies
+}
+
+//Passport config
+app.use(passport.initialize()); 
+app.use(passport.session()); 
+
+passport.use(new LocalStrategy(User.authenticate())); 
+passport.serializeUser(User.serializeUser()); 
+passport.deserializeUser(User.deserializeUser()); 
+
+//Get error message when login fails
+app.use(require('connect-flash')());
+app.use(function(req, res, next) {
+    res.locals.error = req.flash("error");
+    next();
+});
+
+
+//Routes
+const taskRoutes = require('./server/routes/task.route');
+const userRoutes = require('./server/routes/user.route');
+
+app.use(taskRoutes);
+app.use(userRoutes);
 
 //404 page
 app.use((req, res) => {

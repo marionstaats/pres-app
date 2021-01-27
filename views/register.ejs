@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Document</title>
+</head>
+<body>
+
+	<h1> Sign up form </h1> 
+
+	<form action="/register" method="POST" id="registerForm">
+		<div class="mb-3">
+			<label for="username" class="form-label">Username</label>
+			<input type="text" class="form-control" id="username" name='username' onKeyUp="checkInputUser()" required>
+		</div>
+		<div id="errorUser"></div>
+		<div class="mb-3">
+			<label for="email" class="form-label">Email address</label>
+			<input type="email" class="form-control" name='email' id="email" onKeyUp="checkInputEmail()" aria-describedby="emailHelp" required>
+		</div>
+		<div id="errorEmail"></div>
+		<div class="mb-3">
+			<label for="password" class="form-label">Password</label>
+			<input type="password" class="form-control" name='password' id="password" onKeyUp="checkInputPassword()" required>
+		</div>
+		<div id="errorPassword"></div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+
+	<% if (error) { %>
+		<div><%= error%></div>
+	<% } %>
+	
+</body>
+</html>

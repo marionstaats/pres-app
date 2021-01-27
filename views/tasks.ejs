@@ -6,6 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    The index page
+    The Tasks:
+
+    <% tasks.forEach( task => { %>
+        <p> <%= task.nameReceiver %></p>
+    <% }) %>
 </body>
 </html>
