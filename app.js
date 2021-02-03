@@ -1,9 +1,10 @@
-const express = require("express"); 
+const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const path = require('path');
 const passport = require("passport");
-const LocalStrategy = require("passport-local"); 
+const LocalStrategy = require("passport-local");
 const User = require('./server/models/user.model');
 
 //Dotenv - allows you to separate secrets from your source code (passwords etc)
@@ -14,8 +15,12 @@ const publicDirectory = path.join(__dirname, './public');
 
 //Initiate app
 let app = express();
-app.use(express.urlencoded({extended: true}));  //to support URL-encoded bodies
-app.use(express.json());       // to support JSON-encoded bodies 
+app.use(express.urlencoded({ extended: true })); //to support URL-encoded bodies
+app.use(express.json()); // to support JSON-encoded bodies 
+
+//CORS 
+app.use(cors());
+
 
 //Setup static directory to serve
 app.use(express.static(publicDirectory));
@@ -24,33 +29,27 @@ app.use(express.static(publicDirectory));
 app.set("view engine", "ejs");
 
 //Config sessions
-app.use(require("express-session")({ 
-	secret: "Rollotjetjetje is eating your toe", 
-	resave: false, 
-	saveUninitialized: false,
-	cookie: {}
+app.use(require("express-session")({
+    secret: "Rollotjetjetje is eating your toe",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {}
 }));
 
 //In production set 'cookies secure = true' 
 if (app.get('env') === 'production') {
-	app.set('trust proxy', 1) // trust first proxy
-	sess.cookie.secure = true // serve secure cookies
+    app.set('trust proxy', 1) // trust first proxy
+    sess.cookie.secure = true // serve secure cookies
 }
 
 //Passport config
-app.use(passport.initialize()); 
-app.use(passport.session()); 
+app.use(passport.initialize());
+app.use(passport.session());
 
-passport.use(new LocalStrategy(User.authenticate())); 
-passport.serializeUser(User.serializeUser()); 
-passport.deserializeUser(User.deserializeUser()); 
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-//Get error message when login fails
-app.use(require('connect-flash')());
-app.use(function(req, res, next) {
-    res.locals.error = req.flash("error");
-    next();
-});
 
 
 //Routes
@@ -66,11 +65,12 @@ app.use((req, res) => {
 });
 
 //Connection MongoDB
-mongoose.connect(process.env.DB_CONNECT, { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true })
+mongoose.connect(process.env.DB_CONNECT, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+    })
     .then(() => {
         console.log("Successfully connected to MongoDB.");
     })

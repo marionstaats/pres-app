@@ -25,7 +25,18 @@
 			<label for="password" class="form-label">Password</label>
 			<input type="password" class="form-control" name='password' id="password" onKeyUp="checkInputPassword()" required>
 		</div>
-		<div id="errorPassword"></div>
+		<div class="mb-3">
+			<label for="password2" class="form-label">Repeat password</label>
+			<input type="password" class="form-control" name='password2' id="password2" onKeyUp="checkInputPassword()" required>
+		</div>
+		<div>
+			<input type="radio" id="user" name="sortUser" value="user">
+			<label for="user"> User</label><br>
+			<input type="radio" id="shopper" name="sortUser" value="shopper">
+			<label for="shopper"> Shopper</label><br>	
+		</div>
+
+		<!-- <div id="errorPassword"></div> -->
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 

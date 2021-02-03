@@ -3,15 +3,12 @@ const router = express.Router();
 const userController = require('../controllers/user.controller');
 
 //Registration
-router.get('/register', userController.getRegisterForm);
-router.post('/register', userController.saveUser);
+router.post('/api/register', userController.saveUser);
 router.get('/user', userController.getUser);
 router.post('/delete-user', userController.deleteUser);
 
 //Login and logout
-router.get('/login', userController.getLoginForm);
-router.post('/login', userController.loginUser);
-
+router.post('/api/login', userController.loginUser);
 router.post('/logout', userController.logoutUser);
 
 //Upload money to wallet

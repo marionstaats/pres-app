@@ -4,8 +4,7 @@ const taskController = require('../controllers/task.controller');
 
 router.get('/tasks', taskController.getTasks);
 
-router.get('/add-task', taskController.getTaskForm);
-router.post('/add-task', taskController.saveTask);
+router.post('/api/add-task', taskController.saveTask);
 
 router.get('/edit-task/:nameReceiver', taskController.editTaskPage);
 router.post('/edit-task/:nameReceiver', taskController.editTask);

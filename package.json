@@ -1,5 +1,5 @@
 {
-  "name": "bxl-johnson-5.25-client-saint-boniface",
+  "name": "pres-app",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -9,19 +9,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/becodeorg/BXL-Johnson-5.25-Client-Saint-Boniface.git"
+    "url": "git+https://github.com/marionstaats/pres-app.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/becodeorg/BXL-Johnson-5.25-Client-Saint-Boniface/issues"
+    "url": "https://github.com/marionstaats/pres-app/issues"
   },
-  "homepage": "https://github.com/becodeorg/BXL-Johnson-5.25-Client-Saint-Boniface#readme",
+  "homepage": "https://github.com/marionstaats/pres-app#readme",
   "devDependencies": {
+    "@vue/cli-plugin-router": "^4.5.11",
     "nodemon": "^2.0.7"
   },
   "dependencies": {
     "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
