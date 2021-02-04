@@ -6,6 +6,7 @@ const path = require('path');
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require('./server/models/user.model');
+const history = require('connect-history-api-fallback');
 
 //Dotenv - allows you to separate secrets from your source code (passwords etc)
 dotenv.config();
@@ -21,6 +22,8 @@ app.use(express.json()); // to support JSON-encoded bodies
 //CORS 
 app.use(cors());
 
+//History (vue debug)
+app.use(history());
 
 //Setup static directory to serve
 app.use(express.static(publicDirectory));

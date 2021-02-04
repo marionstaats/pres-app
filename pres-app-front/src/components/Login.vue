@@ -49,18 +49,4 @@ export default {
 </script>
 
 <style scoped>
-.register-form {
-    padding: 2em;
-    border: 1px solid black;
-    border-radius: .5em;
-    max-width: 500px;
-    box-sizing: border-box;
-}
-.form-title {
-    margin-top: 0;
-}
-.register-form::v-deep .formulate-input .formulate-input-element {
-    max-width: none;
-}
-
 </style>

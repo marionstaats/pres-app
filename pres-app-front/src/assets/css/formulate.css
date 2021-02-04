@@ -298,6 +298,10 @@
     align-items: center
 }
 
+.formulate-input[data-classification=button] button:hover {
+    background-color: green;
+}
+
 .formulate-input[data-classification=button] button::-moz-placeholder {
     color: #a8a8a8;
     line-height: normal
@@ -948,4 +952,41 @@
     font-weight: 300;
     line-height: 1.5;
     margin-bottom: .25em
+}
+
+
+/* Own styling */
+
+.register-form {
+    margin: 5px;
+    padding: 2em;
+    border: 1px solid #a8a8a8;
+    border-radius: .5em;
+    max-width: 500px;
+    box-sizing: border-box;
+    height: fit-content;
+}
+
+.form-title {
+    margin-top: 0;
+}
+
+.register-form::v-deep .formulate-input .formulate-input-element {
+    max-width: none;
+}
+
+@media (min-width: 420px) {
+    .double-wide {
+        display: flex;
+    }
+    .double-wide .formulate-input {
+        flex-grow: 1;
+        width: calc(50% - .5em);
+    }
+    .double-wide .formulate-input:first-child {
+        margin-right: .5em;
+    }
+    .double-wide .formulate-input:last-child {
+        margin-left: .5em;
+    }
 }

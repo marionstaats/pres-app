@@ -4,7 +4,7 @@ const User = require('../models/user.model');
 //Get list all tasks for specific user
 exports.getTasks = async(req, res) => {
     try {
-        let tasks = await Task.find({ username: req.session.passport.user }, null, {
+        let tasks = await Task.find({ username: 'marion' }, null, { //req.session.passport.user
             limit: parseInt(req.query.limit),
             skip: parseInt(req.query.skip)
         });
@@ -18,7 +18,7 @@ exports.getTasks = async(req, res) => {
 exports.saveTask = async(req, res) => {
     try {
         const task = new Task({
-            username: req.session.passport.user,
+            username: 'marion', //req.session.passport.user,
             relationship: req.body.relationship,
             nameReceiver: req.body.nameReceiver,
             birthdayReceiver: req.body.birthdayReceiver,
@@ -43,30 +43,17 @@ exports.saveTask = async(req, res) => {
         await task.save();
         await res.status(201).send(task);
         //Saving task id in User document
-        await User.updateOne({ username: req.session.passport.user }, { $push: { tasks: task._id } });
+        await User.updateOne({ username: 'marion' }, { $push: { tasks: task._id } });
     } catch (e) {
         res.status(500).send(e)
+        console.log(e);
     }
-}
-
-//Get page to edit a task
-exports.editTaskPage = async(req, res) => {
-    try {
-        let task = await Task.findOne({ nameReceiver: req.params.nameReceiver });
-        if (!task) {
-            return res.status(404).send()
-        }
-        res.send(task);
-    } catch (e) {
-        res.status(500).send(e)
-    }
-
 }
 
 //Update task page
 exports.editTask = async(req, res) => {
     try {
-        let updatedTask = await Task.findOneAndUpdate({ nameReceiver: req.params.nameReceiver }, {
+        let updatedTask = await Task.findOneAndUpdate({ _id: req.body._id }, {
             relationship: req.body.relationship
         }, { new: true });
 
@@ -81,7 +68,7 @@ exports.editTask = async(req, res) => {
 //Delete task
 exports.deleteTask = async(req, res) => {
     try {
-        let deletedTask = await Task.findOneAndDelete({ nameReceiver: req.params.nameReceiver });
+        let deletedTask = await Task.findOneAndDelete({ _id: req.body._id });
         if (!deletedTask) {
             return res.status(404).send()
         }
@@ -96,7 +83,7 @@ exports.deleteTask = async(req, res) => {
 //Complete task
 exports.completeTask = async(res, req) => {
     try {
-        let updatedTask = await Task.updateOne({ nameReceiver: req.params.nameReceiver }, { completed: true });
+        let updatedTask = await Task.updateOne({ _id: req.body._id }, { completed: true });
         if (!updatedTask) {
             return res.status(404).send()
         }
@@ -111,7 +98,7 @@ exports.completeTask = async(res, req) => {
 //Pickup task as shopper
 exports.pickupTask = async(req, res) => {
     try {
-        let pickedupTask = await Task.updateOne({ nameReceiver: req.params.nameReceiver }, { pickedup: true });
+        let pickedupTask = await Task.updateOne({ _id: req.body._id }, { pickedup: true });
         if (!pickedupTask) {
             return res.status(404).send()
         }

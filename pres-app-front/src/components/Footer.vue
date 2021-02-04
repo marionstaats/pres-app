@@ -1,7 +1,7 @@
 <template>
-    <header class="footer">
+    <footer class="footer">
         <h4>Made by Vera & Marion Staats</h4>
-    </header>
+    </footer>
 </template>
 
 <script>

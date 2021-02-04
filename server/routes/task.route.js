@@ -2,17 +2,16 @@ const express = require('express');
 const router = express.Router();
 const taskController = require('../controllers/task.controller');
 
-router.get('/tasks', taskController.getTasks);
+router.get('/api/tasks', taskController.getTasks);
 
 router.post('/api/add-task', taskController.saveTask);
 
-router.get('/edit-task/:nameReceiver', taskController.editTaskPage);
-router.post('/edit-task/:nameReceiver', taskController.editTask);
+router.post('/api/edit-task', taskController.editTask);
 
-router.post('/delete-task/:nameReceiver', taskController.deleteTask);
+router.post('/api/delete-task', taskController.deleteTask);
 
-router.post('/complete-task/:nameReceiver', taskController.completeTask);
+router.post('/api/complete-task', taskController.completeTask);
 
-router.post('/pickup-task/:nameReceiver', taskController.pickupTask);
+router.post('/api/pickup-task', taskController.pickupTask);
 
 module.exports = router;

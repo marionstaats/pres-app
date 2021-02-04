@@ -3,7 +3,7 @@
         <h1>The Press App</h1>
         <div id="nav">
             <router-link to="/">Home</router-link> |
-            <router-link to="/register">Register</router-link>
+            <router-link to="/dashboard">Dashboard</router-link>
         </div>
     </header>
 </template>
@@ -20,6 +20,8 @@ export default {
         text-align: center;
         color: white;
         padding: 10px;
+        position: sticky;
+        top: 0;
     }
     #nav a {
         padding-right: 5px;
