@@ -1,6 +1,6 @@
 # The Pres App
 
-Check out the app at: https://thepres-app.heroku.com/
+Check out the app at:
 
 ## Description
 
